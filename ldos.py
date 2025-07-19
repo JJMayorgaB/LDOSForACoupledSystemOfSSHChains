@@ -15,13 +15,13 @@ plt.rcParams.update({
     'text.latex.preamble': r'\usepackage{amsmath}',
     'font.family': 'serif',
     'font.serif': ['Computer Modern'],
-    'font.size': 12,
-    'axes.labelsize': 14,
-    'axes.titlesize': 16,
-    'xtick.labelsize': 12,
-    'ytick.labelsize': 12,
-    'legend.fontsize': 12,
-    'figure.titlesize': 18
+    'font.size': 14,
+    'axes.labelsize': 16,
+    'axes.titlesize': 18,
+    'xtick.labelsize': 14,
+    'ytick.labelsize': 14,
+    'legend.fontsize': 14,
+    'figure.titlesize': 20
 })
 
 # Parámetros principales

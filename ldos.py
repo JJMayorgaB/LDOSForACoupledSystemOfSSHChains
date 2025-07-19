@@ -15,13 +15,13 @@ plt.rcParams.update({
     'text.latex.preamble': r'\usepackage{amsmath}',
     'font.family': 'serif',
     'font.serif': ['Computer Modern'],
-    'font.size': 22,
-    'axes.labelsize': 24,
-    'axes.titlesize': 26,
-    'xtick.labelsize': 22,
-    'ytick.labelsize': 22,
-    'legend.fontsize': 22,
-    'figure.titlesize': 28
+    'font.size': 30,
+    'axes.labelsize': 32,
+    'axes.titlesize': 34,
+    'xtick.labelsize': 30,
+    'ytick.labelsize': 30,
+    'legend.fontsize': 30,
+    'figure.titlesize': 36
 })
 
 # Main parameters
@@ -157,7 +157,7 @@ imaginary_part = np.imag(G_complex)
 result = -imaginary_part / np.pi
 
 # Visualization
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(10,8))
 
 plt.plot(omega_values, result, 'r-', linewidth=1)
 plt.xlabel(r'$\omega$')
@@ -214,7 +214,7 @@ def calculate_normalized_constants(A_param, m1_param, m2_param, A_prime_param, m
     
     return c1_squared_aux, c2_squared_aux, exp_term_d_aux, exp_term_xi_aux
 
-# Variation of t - GENERATE SEPARATE PLOTS
+# Variation of t 
 t_values = [0.0, 0.05, 0.5, 1.0, 2.0]
 
 for i, t_var in enumerate(t_values):
@@ -231,8 +231,8 @@ for i, t_var in enumerate(t_values):
     G_complex_var = (a_x * omega_complex**3) / denominator_var
     result_var = -np.imag(G_complex_var) / np.pi
     
-    # Create individual figure
-    plt.figure(figsize=(10, 8))
+    # Create individual figure with correct figsize
+    plt.figure(figsize=(10, 8))  # Changed from (70, 8) which was clearly an error
     plt.plot(omega_values, result_var, linewidth=1, color='red')
     plt.title(rf"$\rho(\omega)$ with $t = {t_var}$")
     plt.xlabel(r'$\omega$')
@@ -254,7 +254,6 @@ for i, t_var in enumerate(t_values):
     plt.savefig(os.path.join(figures_dir, filename_base + ".svg"), format="svg")
     plt.savefig(os.path.join(figures_dir, filename_base + ".jpg"), format="jpg", dpi=300)
 
-
 # GIF configuration 
 t_min = 0.0
 t_max = 3.0
@@ -262,6 +261,21 @@ t_max = 3.0
 t_segment1 = np.linspace(t_min, t_min + 0.15, 250, endpoint=False)
 t_segment2 = np.linspace(t_min + 0.2, t_max, 100, endpoint=True)
 t_values_anim = np.concatenate([t_segment1, t_segment2])
+
+# Configure smaller font sizes specifically for GIF to reduce memory usage
+plt.rcParams.update({
+    'text.usetex': True,
+    'text.latex.preamble': r'\usepackage{amsmath}',
+    'font.family': 'serif',
+    'font.serif': ['Computer Modern'],
+    'font.size': 12,
+    'axes.labelsize': 14,
+    'axes.titlesize': 16,
+    'xtick.labelsize': 12,
+    'ytick.labelsize': 12,
+    'legend.fontsize': 12,
+    'figure.titlesize': 18
+})
 
 # Create the figure
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -323,6 +337,7 @@ anim = FuncAnimation(fig, animate, frames=t_values_anim,
                      init_func=init, blit=False, interval=100)
 
 # Save the GIF
-anim.save(os.path.join(figures_dir, 'ldos_evolution15.gif'), writer='pillow', fps=15, dpi=300)
-anim.save(os.path.join(figures_dir, 'ldos_evolution10.gif'), writer='pillow', fps=10, dpi=300)
-anim.save(os.path.join(figures_dir, 'ldos_evolution30.gif'), writer='pillow', fps=30, dpi=300)
+print("Saving GIFs with different frame rates")
+anim.save(os.path.join(figures_dir, 'ldos_evolution15.gif'), writer='pillow', fps=15, dpi=200)
+anim.save(os.path.join(figures_dir, 'ldos_evolution10.gif'), writer='pillow', fps=10, dpi=200)
+anim.save(os.path.join(figures_dir, 'ldos_evolution30.gif'), writer='pillow', fps=30, dpi=200)

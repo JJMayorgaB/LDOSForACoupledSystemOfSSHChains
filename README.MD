@@ -28,36 +28,32 @@ Fismatavan/
 
 The system consists of two coupled SSH chains with edge states described by:
 
-- **Right edge state**: `|ψ_R⟩ = c_R(e^(-x/d_+) - e^(-x/d_-))|φ⟩`
-- **Left edge state**: `|ψ_L⟩ = c_L(e^(x/ξ_+) - e^(x/ξ_-))|φ⟩`
+- **Right edge state**: $|\psi_R\rangle = c_R(e^{-x/d_+} - e^{-x/d_-})|\phi\rangle$
+- **Left edge state**: $|\psi_L\rangle = c_L(e^{x/\xi_+} - e^{x/\xi_-})|\phi\rangle$
 
 Where the decay parameters are given by:
-- `d_±^(-1) = |A|/(2m_2) * (1 ± √(1 - 4m_1m_2/A²))`
-- `ξ_±^(-1) = |A'|/(2m_2') * (1 ± √(1 - 4m_1'm_2'/A'²))`
+- $d_{\pm}^{-1} = \frac{|A|}{2m_2} \left(1 \pm \sqrt{1 - \frac{4m_1m_2}{A^2}}\right)$
+- $\xi_{\pm}^{-1} = \frac{|A'|}{2m_2'} \left(1 \pm \sqrt{1 - \frac{4m_1'm_2'}{A'^2}}\right)$
 
 ### Green's Function Approach
 
 The coupled system is analyzed using the Dyson equation with a tunneling Hamiltonian:
 
-```
-V̂ = t(|ψ_R⟩⟨ψ_L| + |ψ_L⟩⟨ψ_R|)
-```
+$$\hat{V} = t(|\psi_R\rangle\langle\psi_L| + |\psi_L\rangle\langle\psi_R|)$$
 
 The resulting Green's function for the right edge state is:
 
-```
-G_RR(x,ω) = [a(x)ω³] / [ω⁴ - b(x)ω² + ½b²(x)]
-```
+$$G_{RR}(x,\omega) = \frac{a(x)\omega^3}{\omega^4 - b(x)\omega^2 + \frac{1}{2}b^2(x)}$$
 
 Where:
-- `a(x) = 2c₁²[e^(-x/d_+) - e^(-x/d_-)]²`
-- `b(x) = 16t²c₁²c₂²[e^(-x/d_+) - e^(-x/d_-)]²[e^(x/ξ_+) - e^(x/ξ_-)]²`
+- $a(x) = 2c_1^2[e^{-x/d_+} - e^{-x/d_-}]^2$
+- $b(x) = 16t^2c_1^2c_2^2[e^{-x/d_+} - e^{-x/d_-}]^2[e^{x/\xi_+} - e^{x/\xi_-}]^2$
 
 ### Normalization Constants
 
 The normalization constants are calculated as:
-- `c₁ = √(d_+ + d_-) / |d_+ - d_-|`
-- `c₂ = √(ξ_+ + ξ_-) / |ξ_+ - ξ_-|`
+- $c_1 = \frac{\sqrt{d_+ + d_-}}{|d_+ - d_-|}$
+- $c_2 = \frac{\sqrt{\xi_+ + \xi_-}}{|\xi_+ - \xi_-|}$
 
 ## Code Functionality
 
@@ -66,37 +62,35 @@ The normalization constants are calculated as:
 1. **Parameter Calculation**: Computes all relevant physical parameters including decay lengths, normalization constants, and coupling terms.
 
 2. **LDOS Computation**: Calculates the Local Density of States using the formula:
-   ```
-   ρ(ω) = -1/π * Im{G(ω + iη)}
-   ```
-   where η is a small imaginary part for analytical continuation.
+   $$\rho(\omega) = -\frac{1}{\pi} \text{Im}\{G(\omega + i\eta)\}$$
+   where $\eta$ is a small imaginary part for analytical continuation.
 
 3. **Visualization**: Generates multiple types of plots:
    - Static LDOS plots for different coupling strengths
    - Animated evolution showing the transition from uncoupled to strongly coupled regimes
 
-4. **Parameter Studies**: Systematically varies the coupling parameter `t` to study the evolution of the LDOS.
+4. **Parameter Studies**: Systematically varies the coupling parameter $t$ to study the evolution of the LDOS.
 
 ### Key Parameters
 
 - **Physical Parameters**:
-  - `w = 1.0`: Hopping amplitude
-  - `a_val = 1.0`: Lattice parameter
-  - `v = 0.8`: Intra-cell hopping
-  - `x_eval = 0.5`: Evaluation position
-  - `t`: Tunneling coupling strength (varied)
+  - $w = 1.0$: Hopping amplitude
+  - $a_{val} = 1.0$: Lattice parameter
+  - $v = 0.8$: Intra-cell hopping
+  - $x_{eval} = 0.5$: Evaluation position
+  - $t$: Tunneling coupling strength (varied)
 
 - **Numerical Parameters**:
-  - `n = 5.0`: Frequency range [-n, n]
-  - `m = 2000`: Number of discretization points
-  - `η = 5Δω`: Imaginary part for analytical continuation
+  - $n = 5.0$: Frequency range $[-n, n]$
+  - $m = 2000$: Number of discretization points
+  - $\eta = 5\Delta\omega$: Imaginary part for analytical continuation
 
 ### Output
 
 The code generates:
 
 1. **Console Output**: Detailed parameter values and intermediate calculations
-2. **Static Plots**: Individual LDOS plots for t = [0.0, 0.05, 0.5, 1.0, 2.0]
+2. **Static Plots**: Individual LDOS plots for $t = [0.0, 0.05, 0.5, 1.0, 2.0]$
 3. **Animations**: GIF files showing smooth evolution of LDOS with varying coupling strength
 4. **Log File**: Complete parameter dump for reference
 
@@ -123,10 +117,10 @@ pip install numpy matplotlib ipython
 
 The LDOS plots reveal several key physics:
 
-- **t = 0**: Uncoupled system showing isolated edge state peaks
-- **Small t**: Weak coupling regime with slight peak splitting
-- **Intermediate t**: Hybridization of edge states becomes apparent
-- **Large t**: Strong coupling regime with significant spectral weight redistribution
+- **$t = 0$**: Uncoupled system showing isolated edge state peaks
+- **Small $t$**: Weak coupling regime with slight peak splitting
+- **Intermediate $t$**: Hybridization of edge states becomes apparent
+- **Large $t$**: Strong coupling regime with significant spectral weight redistribution
 
 The animated evolution demonstrates the smooth transition between these regimes, providing insight into the nature of edge state coupling in topological systems.
 

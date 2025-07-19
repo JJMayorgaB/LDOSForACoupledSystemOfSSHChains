@@ -1,12 +1,12 @@
-# Local Density of States (LDOS) Calculator for Coupled SSH Chains
+# 🔬 Local Density of States (LDOS) Calculator for Coupled SSH Chains
 
 This repository contains a Python implementation for calculating and visualizing the Local Density of States (LDOS) of two coupled topological Su-Schrieffer-Heeger (SSH) chains using Green's function methods.
 
-## Overview
+## 📋 Overview
 
 The SSH model is a fundamental theoretical framework for understanding topological properties in one-dimensional systems, originally developed to model soliton formation in polyacetylene. This implementation focuses on studying the interaction between edge states of two coupled SSH chains through tunneling interactions.
 
-## Directory Structure
+## 📁 Directory Structure
 
 ```
 Fismatavan/
@@ -22,9 +22,9 @@ Fismatavan/
 └── README.md                  # This file
 ```
 
-## Theory Background
+## 🧮 Theory Background
 
-### SSH Model and Edge States
+### ⚛️ SSH Model and Edge States
 
 The system consists of two coupled SSH chains with edge states described by:
 
@@ -35,7 +35,7 @@ Where the decay parameters are given by:
 - $d_{\pm}^{-1} = \frac{|A|}{2m_2} \left(1 \pm \sqrt{1 - \frac{4m_1m_2}{A^2}}\right)$
 - $\xi_{\pm}^{-1} = \frac{|A'|}{2m_2'} \left(1 \pm \sqrt{1 - \frac{4m_1'm_2'}{A'^2}}\right)$
 
-### Green's Function Approach
+### 🌊 Green's Function Approach
 
 The coupled system is analyzed using the Dyson equation with a tunneling Hamiltonian:
 
@@ -49,15 +49,15 @@ Where:
 - $a(x) = 2c_1^2[e^{-x/d_+} - e^{-x/d_-}]^2$
 - $b(x) = 16t^2c_1^2c_2^2[e^{-x/d_+} - e^{-x/d_-}]^2[e^{x/\xi_+} - e^{x/\xi_-}]^2$
 
-### Normalization Constants
+### 🔢 Normalization Constants
 
 The normalization constants are calculated as:
 - $c_1 = \frac{\sqrt{d_+ + d_-}}{|d_+ - d_-|}$
 - $c_2 = \frac{\sqrt{\xi_+ + \xi_-}}{|\xi_+ - \xi_-|}$
 
-## Code Functionality
+## ⚙️ Code Functionality
 
-### Main Features
+### ✨ Main Features
 
 1. **Parameter Calculation**: Computes all relevant physical parameters including decay lengths, normalization constants, and coupling terms.
 
@@ -71,7 +71,7 @@ The normalization constants are calculated as:
 
 4. **Parameter Studies**: Systematically varies the coupling parameter $t$ to study the evolution of the LDOS.
 
-### Key Parameters
+### 🎛️ Key Parameters
 
 - **Physical Parameters**:
   - $w = 1.0$: Hopping amplitude
@@ -85,7 +85,7 @@ The normalization constants are calculated as:
   - $m = 2000$: Number of discretization points
   - $\eta = 5\Delta\omega$: Imaginary part for analytical continuation
 
-### Output
+### 📤 Output
 
 The code generates:
 
@@ -94,26 +94,26 @@ The code generates:
 3. **Animations**: GIF files showing smooth evolution of LDOS with varying coupling strength
 4. **Log File**: Complete parameter dump for reference
 
-## Usage
+## 🚀 Usage
 
 ```bash
 python ldos.py
 ```
 
-### Requirements
+### 📦 Requirements
 
 - Python 3.x
 - NumPy
 - Matplotlib
 - IPython (for display utilities)
 
-### Installation
+### 💾 Installation
 
 ```bash
 pip install numpy matplotlib ipython
 ```
 
-## Results Interpretation
+## 📊 Results Interpretation
 
 The LDOS plots reveal several key physics:
 
@@ -124,7 +124,7 @@ The LDOS plots reveal several key physics:
 
 The animated evolution demonstrates the smooth transition between these regimes, providing insight into the nature of edge state coupling in topological systems.
 
-## Applications
+## 🔧 Applications
 
 This code is useful for:
 - Understanding topological edge state physics
@@ -132,9 +132,9 @@ This code is useful for:
 - Educational demonstrations of Green's function methods
 - Research into coupled topological systems
 
-## References
+## 📚 References
 
-### Foundational SSH Model and Topological Physics
+### 🏗️ Foundational SSH Model and Topological Physics
 
 1. **Su, W. P., Schrieffer, J. R., & Heeger, A. J.** (1979). Solitons in Polyacetylene. *Physical Review Letters*, 42(25), 1698-1701. [DOI: 10.1103/PhysRevLett.42.1698](https://link.aps.org/doi/10.1103/PhysRevLett.42.1698)
    - *The original SSH model paper that introduced the theoretical framework for studying topological solitons in one-dimensional systems, forming the foundation for this work.*
@@ -142,7 +142,7 @@ This code is useful for:
 2. **Kitaev, A. Yu.** (2001). Unpaired Majorana fermions in quantum wires. *Physics-Uspekhi*, 44(10S), 131. [DOI: 10.1070/1063-7869/44/10S/S29](https://dx.doi.org/10.1070/1063-7869/44/10S/S29)
    - *Seminal work on topological superconductors and Majorana edge states, providing theoretical context for understanding topological edge modes in coupled systems.*
 
-### Experimental Realizations and Applications
+### 🧪 Experimental Realizations and Applications
 
 3. **von Klitzing, K., Dorda, G., & Pepper, M.** (1980). New Method for High-Accuracy Determination of the Fine-Structure Constant Based on Quantized Hall Resistance. *Physical Review Letters*, 45(6), 494-497. [DOI: 10.1103/PhysRevLett.45.494](https://link.aps.org/doi/10.1103/PhysRevLett.45.494)
    - *Discovery of the quantum Hall effect, demonstrating topological quantum phases in condensed matter systems and establishing experimental precedent for topological edge states.*
@@ -150,7 +150,7 @@ This code is useful for:
 4. **Lu, L., Joannopoulos, J. D., & Soljačić, M.** (2014). Topological photonics. *Nature Photonics*, 8(11), 821-829. [DOI: 10.1038/nphoton.2014.248](https://doi.org/10.1038/nphoton.2014.248)
    - *Comprehensive review of topological concepts in photonic systems, relevant for understanding optical implementations of SSH-like models and coupled topological structures.*
 
-### Local Density of States Theory and Methods
+### 📐 Local Density of States Theory and Methods
 
 5. **Mignuzzi, S., Vezzoli, S., Horsley, S. A. R., Barnes, W. L., Maier, S. A., & Sapienza, R.** (2019). Nanoscale Design of the Local Density of Optical States. *Nano Letters*, 19(3), 1613-1617. [DOI: 10.1021/acs.nanolett.8b04515](https://doi.org/10.1021/acs.nanolett.8b04515)
    - *Modern treatment of LDOS calculations and design principles, providing methodological background for the Green's function approach used in this implementation.*
@@ -158,11 +158,11 @@ This code is useful for:
 6. **Iffländer, T., Rolf-Pissarczyk, S., Winking, L., Ulbrich, R. G., Al-Zubi, A., Blügel, S., & Wenderoth, M.** (2015). Local Density of States at Metal-Semiconductor Interfaces: An Atomic Scale Study. *Physical Review Letters*, 114(14), 146804. [DOI: 10.1103/PhysRevLett.114.146804](https://link.aps.org/doi/10.1103/PhysRevLett.114.146804)
    - *Experimental and theoretical study of LDOS at interfaces, demonstrating the importance of local electronic structure analysis in understanding coupled quantum systems.*
 
-### Theoretical Context
+### 💡 Theoretical Context
 
 The theoretical framework implemented in this code draws primarily from the SSH model [1] for understanding topological edge states, extended to coupled systems using Green's function methods. The LDOS calculation approach follows established quantum mechanical principles [5,6], while the physical motivation comes from both condensed matter [3] and photonic [4] realizations of topological systems. The study of coupled edge modes is particularly relevant for understanding Majorana fermions [2] and other exotic topological phases.
 
-## License
+## 📄 License
 
 Academic Project - Universidad Nacional de Colombia
 Advanced Mathematical Physics - 2025-I

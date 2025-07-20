@@ -132,6 +132,34 @@ This code is useful for:
 - Educational demonstrations of Green's function methods
 - Research into coupled topological systems
 
+## 🎓 Academic Context
+
+This computational implementation was developed as part of an advanced mathematical physics research project at the **National University of Colombia - Department of Physics**. The work investigates the local density of states (LDOS) for coupled topological Su-Schrieffer-Heeger (SSH) chains using Green's function methods, providing both analytical and numerical insights into edge state physics.
+
+### 📊 Research Contributions
+
+The study presents a comprehensive analysis of:
+
+- **Single SSH Chain LDOS**: Analytical derivation confirming the existence of zero-energy edge states localized at boundaries, manifesting as Dirac delta peaks at ω = 0
+- **Coupled System Dynamics**: Investigation of inter-chain tunneling effects that destroy zero-energy modes and create symmetric hybridized states
+- **Symmetry Preservation**: Demonstration that chiral symmetry is maintained throughout the coupling evolution, ensuring symmetric peak distribution around the origin
+- **Phase Transitions**: Systematic exploration of the transition from well-localized topological edge states to delocalized bulk resonances as coupling strength increases
+
+### 🔬 Key Findings
+
+The research reveals several important physical phenomena:
+
+1. **Level Repulsion**: Weak coupling (t = 0.05) splits the zero-energy peak into two symmetric peaks due to protected level repulsion from chiral symmetry
+2. **Progressive Hybridization**: Intermediate coupling strengths show peaks shifting away from ω = 0 with decreasing amplitudes, indicating partial delocalization
+3. **Bulk Merger**: Strong coupling (t = 2) causes edge states to merge with the bulk continuum, creating broad, low-amplitude resonances
+4. **Topological Robustness**: The evolution demonstrates both the robustness of edge states against weak perturbations and their eventual dissolution under strong interactions
+
+This work contributes to the theoretical understanding of topological materials and provides valuable insights for designing quantum heterostructures and devices that exploit edge state interactions.
+
+### 💡 Theoretical Context
+
+The theoretical framework implemented in this code draws primarily from the SSH model [1] for understanding topological edge states, extended to coupled systems using Green's function methods. The LDOS calculation approach follows established quantum mechanical principles [5,6], while the physical motivation comes from both condensed matter [3] and photonic [4] realizations of topological systems. The study of coupled edge modes is particularly relevant for understanding Majorana fermions [2] and other exotic topological phases.
+
 ## 📚 References
 
 ### 🏗️ Foundational SSH Model and Topological Physics
@@ -157,13 +185,4 @@ This code is useful for:
 
 6. **Iffländer, T., Rolf-Pissarczyk, S., Winking, L., Ulbrich, R. G., Al-Zubi, A., Blügel, S., & Wenderoth, M.** (2015). Local Density of States at Metal-Semiconductor Interfaces: An Atomic Scale Study. *Physical Review Letters*, 114(14), 146804. [DOI: 10.1103/PhysRevLett.114.146804](https://link.aps.org/doi/10.1103/PhysRevLett.114.146804)
    - *Experimental and theoretical study of LDOS at interfaces, demonstrating the importance of local electronic structure analysis in understanding coupled quantum systems.*
-
-### 💡 Theoretical Context
-
-The theoretical framework implemented in this code draws primarily from the SSH model [1] for understanding topological edge states, extended to coupled systems using Green's function methods. The LDOS calculation approach follows established quantum mechanical principles [5,6], while the physical motivation comes from both condensed matter [3] and photonic [4] realizations of topological systems. The study of coupled edge modes is particularly relevant for understanding Majorana fermions [2] and other exotic topological phases.
-
-## 📄 License
-
-Academic Project - Universidad Nacional de Colombia
-Advanced Mathematical Physics - 2025-I
 

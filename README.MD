@@ -6,10 +6,10 @@ This repository contains a Python implementation for calculating and visualizing
 
 The SSH model is a fundamental theoretical framework for understanding topological properties in one-dimensional systems, originally developed to model soliton formation in polyacetylene. This implementation focuses on studying the interaction between edge states of two coupled SSH chains through tunneling interactions.
 
-## 📁 Directory Structure
+## 📁 Repository Structure
 
 ```
-Fismatavan/
+LDOSForACoupledSystemOfSSHChains/
 ├── figures/                   # Output directory for generated plots and animations
 │   ├── ldos_plot.jpg          # Main LDOS plot (JPEG format)
 │   ├── ldos_plot.svg          # Main LDOS plot (SVG format)

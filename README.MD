@@ -10,13 +10,14 @@ The SSH model is a fundamental theoretical framework for understanding topologic
 
 ```
 Fismatavan/
-├── figures/                    # Output directory for generated plots and animations
+├── figures/                   # Output directory for generated plots and animations
 │   ├── ldos_plot.jpg          # Main LDOS plot (JPEG format)
 │   ├── ldos_plot.svg          # Main LDOS plot (SVG format)
 │   ├── ldos_t_*.jpg           # Individual LDOS plots for different coupling values
 │   ├── ldos_t_*.svg           # Individual LDOS plots (SVG format)
 │   ├── ldos_evolution*.gif    # Animated evolution of LDOS with varying number of FPS
 │   └── ...
+├── LDOS_for...chains.pdf      # PDF paper where the simulations where presented
 ├── ldos.py                    # Main Python script for LDOS calculations
 ├── log.txt                    # Output log with calculated parameters
 └── README.md                  # This file
@@ -134,7 +135,7 @@ This code is useful for:
 
 ## 🎓 Academic Context
 
-This computational implementation was developed as part of an advanced mathematical physics research project at the **National University of Colombia - Department of Physics**. The work investigates the local density of states (LDOS) for coupled topological Su-Schrieffer-Heeger (SSH) chains using Green's function methods, providing both analytical and numerical insights into edge state physics.
+This computational implementation was developed as part of the course Advanced Mathematical Physics as a final research project at the **National University of Colombia - Department of Physics**. The work investigates the local density of states (LDOS) for coupled topological Su-Schrieffer-Heeger (SSH) chains using Green's function methods, providing both analytical and numerical insights into edge state physics.
 
 ### 📊 Research Contributions
 
@@ -186,3 +187,7 @@ The theoretical framework implemented in this code draws primarily from the SSH 
 6. **Iffländer, T., Rolf-Pissarczyk, S., Winking, L., Ulbrich, R. G., Al-Zubi, A., Blügel, S., & Wenderoth, M.** (2015). Local Density of States at Metal-Semiconductor Interfaces: An Atomic Scale Study. *Physical Review Letters*, 114(14), 146804. [DOI: 10.1103/PhysRevLett.114.146804](https://link.aps.org/doi/10.1103/PhysRevLett.114.146804)
    - *Experimental and theoretical study of LDOS at interfaces, demonstrating the importance of local electronic structure analysis in understanding coupled quantum systems.*
 
+## 📄 License
+
+Academic Project - Universidad Nacional de Colombia
+Advanced Mathematical Physics - 2025-I

@@ -390,7 +390,7 @@ def animate(t_var):
     
     # Add text box with |b| value
     ax.text(0.98, 0.02, f'$|b| = {abs(np.sqrt(b_x_var)):.3f}$', transform=ax.transAxes, 
-            bbox=dict(boxstyle='round', facecolor='white', alpha=0.8), fontsize=6,
+            bbox=dict(boxstyle='round', facecolor='white', alpha=0.8), fontsize=18,
             horizontalalignment='right', verticalalignment='bottom')
 
     return (line,)

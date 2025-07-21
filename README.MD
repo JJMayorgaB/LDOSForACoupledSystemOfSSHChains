@@ -101,7 +101,7 @@ The code generates:
 2. **Main LDOS Plot**: Shows the characteristic form with labeled tick marks at critical frequencies
 3. **Special t=0 Plot**: Highlights the delta function behavior at ω=0 for uncoupled chains
 4. **Coupling Evolution Plots**: Individual plots for different coupling strengths showing the transition from isolated peaks to hybridized states
-5. **Animation**: Smooth GIF evolution from t=0 to t=5 showing the complete coupling dynamics
+5. **Animation**: Smooth GIF evolution from t=0 to t=3 showing the complete coupling dynamics
 6. **Multiple Formats**: All plots saved in both SVG (vector) and JPG (raster) formats
 
 ## 🚀 Usage
@@ -147,11 +147,6 @@ The LDOS plots reveal several key physics regimes:
   - Large peak separation indicating strong hybridization
   - Edge states significantly modified by inter-chain interactions
 
-All plots (except t=0) show:
-- Custom x-axis ticks at positions: -b, -0.5, 0, 0.5, b
-- Corresponding labels: $-b$, $-0.5$, $0$, $0.5$, $b$
-- |b| value annotation in the lower-right corner
-
 ## 🎬 Animation Features
 
 The GIF animation demonstrates:
@@ -180,18 +175,6 @@ The study presents a comprehensive analysis of:
 - **Single SSH Chain LDOS**: Analytical derivation confirming the existence of zero-energy edge states localized at boundaries, manifesting as Dirac delta peaks at ω = 0
 - **Coupled System Dynamics**: Investigation of inter-chain tunneling effects that destroy zero-energy modes and create symmetric hybridized states
 - **Symmetry Preservation**: Demonstration that chiral symmetry is maintained throughout the coupling evolution, ensuring symmetric peak distribution around the origin
-- **Phase Transitions**: Systematic exploration of the transition from well-localized topological edge states to delocalized bulk resonances as coupling strength increases
-
-### 🔬 Key Findings
-
-The research reveals several important physical phenomena:
-
-1. **Level Repulsion**: Weak coupling (t = 0.05) splits the zero-energy peak into two symmetric peaks due to protected level repulsion from chiral symmetry
-2. **Progressive Hybridization**: Intermediate coupling strengths show peaks shifting away from ω = 0 with decreasing amplitudes, indicating partial delocalization
-3. **Bulk Merger**: Strong coupling (t = 5) causes edge states to merge with the bulk continuum, creating broad, low-amplitude resonances
-4. **Topological Robustness**: The evolution demonstrates both the robustness of edge states against weak perturbations and their eventual dissolution under strong interactions
-
-This work contributes to the theoretical understanding of topological materials and provides valuable insights for designing quantum heterostructures and devices that exploit edge state interactions.
 
 ### 💡 Theoretical Context
 

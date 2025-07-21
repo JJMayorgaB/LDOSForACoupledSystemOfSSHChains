@@ -15,13 +15,13 @@ plt.rcParams.update({
     'text.latex.preamble': r'\usepackage{amsmath}',
     'font.family': 'serif',
     'font.serif': ['Computer Modern'],
-    'font.size': 30,
-    'axes.labelsize': 32,
-    'axes.titlesize': 34,
-    'xtick.labelsize': 30,
-    'ytick.labelsize': 30,
-    'legend.fontsize': 30,
-    'figure.titlesize': 36
+    'font.size': 18,
+    'axes.labelsize': 20,
+    'axes.titlesize': 22,
+    'xtick.labelsize': 18,
+    'ytick.labelsize': 18,
+    'legend.fontsize': 18,
+    'figure.titlesize': 20
 })
 
 # Main parameters
@@ -29,8 +29,8 @@ w = 1.0
 a_val = 1.0    
 v = 0.8      
 x_eval = 0.5   
-n = 5.0
-m = 2000
+n = 4.0
+m = 8000
 
 # Normal parameters
 A = w * a_val
@@ -43,7 +43,7 @@ m2_prime = 1.1* w * a_val**2 / 2
 m1_prime = abs(0.9*v - 1.1*w) 
 
 # Parameter t
-t = 1.2  
+t = 0.5
 
 print("Normal parameters:")
 print(f"A = {A}")
@@ -58,7 +58,7 @@ print(f"t = {t}")
 # Discretization of ω space
 Delta_omega = 2 * n / m
 omega_values = np.linspace(-n, n, m)
-eta = 5 * Delta_omega
+eta = 2* Delta_omega
 
 print(f"\nDiscretization:")
 print(f"n = {n}")
@@ -133,22 +133,23 @@ print(f"Exponential term xi: e^(x/xi+) - e^(x/xi-) = {exp_term_xi}")
 
 # Verification of the new formulas
 a_check = 2 * c1_squared * (abs(exp_term_d))**2
-b_check = 16 * t**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
+b_squared_check = 4 * t**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
 
 
 a_x = 2 * c1_squared * (abs(exp_term_d))**2
-b_x = 16 * t**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
+b_x_squared = 4 * t**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
+b_x = np.sqrt(b_x_squared)
 
 print(f"\nFunctions evaluated at x = {x_eval}:")
 print(f"a({x_eval}) = 2c1^2[e^(-x/d+) - e^(-x/d-)]^2 = {a_x:.10f}")
-print(f"b({x_eval}) = 16t^2c1^2c2^2[e^(-x/d+) - e^(-x/d-)]^2[e^(x/xi+) - e^(x/xi-)]^2 = {b_x:.6f}")
+print(f"b({x_eval}) = 4t^2c1^2c2^2[e^(-x/d+) - e^(-x/d-)]^2[e^(x/xi+) - e^(x/xi-)]^2 = {b_x:.6f}")
 
 # Analytical continuation: omega -> omega + i*eta
 omega_complex = omega_values + 1j * eta
 
 # Calculation of G(omega) with analytical continuation
-numerator = a_x * omega_complex**3
-denominator = omega_complex**4 - b_x * omega_complex**2 + 0.5 * b_x**2
+numerator = a_x * omega_complex
+denominator = omega_complex**2 - b_x_squared
 
 G_complex = numerator / denominator
 
@@ -157,17 +158,29 @@ imaginary_part = np.imag(G_complex)
 result = -imaginary_part / np.pi
 
 # Visualization
-plt.figure(figsize=(10,8))
+plt.figure(figsize=(8,6))
 
 plt.plot(omega_values, result, 'r-', linewidth=1)
 plt.xlabel(r'$\omega$')
 plt.ylabel(r'$\rho(\omega)$')
+plt.title(r'$\rho(x,\omega) = f(x,x)[\delta(\omega-b)+\delta(\omega+b)]$')
 plt.grid(True, alpha=0.3)
-plt.xlim(-n,n)
+plt.xlim(-0.75,0.75)
+
+# Set specific ticks and labels for the first plot only
+tick_positions = [-b_x, -0.5, 0, 0.5, b_x]
+tick_labels = [r'$-b$', r'$-0.5$', r'$0$', r'$0.5$', r'$b$']
+plt.xticks(tick_positions, tick_labels)
+
+# Add text box with |b| value
+plt.text(0.98, 0.05, f'$|b| = {abs(b_x):.3f}$', transform=plt.gca().transAxes, 
+         bbox=dict(boxstyle='round', facecolor='white', alpha=0.8), fontsize=18, 
+         horizontalalignment='right', verticalalignment='bottom')
 
 plt.tight_layout()
 plt.savefig(os.path.join(figures_dir, "ldos_plot.svg"), format="svg")
 plt.savefig(os.path.join(figures_dir, "ldos_plot.jpg"), format="jpg", dpi=300)
+plt.show()
 
 # Auxiliary function to calculate normalized constants given parameters
 def calculate_normalized_constants(A_param, m1_param, m2_param, A_prime_param, m1_prime_param, m2_prime_param, x_eval_param):
@@ -215,71 +228,112 @@ def calculate_normalized_constants(A_param, m1_param, m2_param, A_prime_param, m
     return c1_squared_aux, c2_squared_aux, exp_term_d_aux, exp_term_xi_aux
 
 # Variation of t 
-t_values = [0.0, 0.05, 0.5, 1.0, 2.0]
+t_values = [0.05, 2.0, 5.0]
+
+plt.rcParams.update({
+    'font.size': 22,
+    'axes.labelsize': 24,
+    'axes.titlesize': 26,
+    'xtick.labelsize': 22,
+    'ytick.labelsize': 22,
+    'legend.fontsize': 22,
+    'figure.titlesize': 24
+})
+    
+
+# Special case for t = 0.0
+t_var = 0.0
+b_x_var = 4 * t_var**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
+
+print(f"\nt = {t_var}:")
+print(f"  a(x) = {a_x:.10f}")
+print(f"  b(x) = {b_x_var:.6f}")
+
+# Recalculate G(omega)
+denominator_var = omega_complex**2 - b_x_var 
+G_complex_var = (a_x * omega_complex) / denominator_var
+result_var = -np.imag(G_complex_var) / np.pi
+
+# Create figure for t = 0.0
+plt.figure(figsize=(9, 7))
+plt.plot(omega_values, result_var, linewidth=1, color='red')
+plt.title(rf'$\rho(x,\omega) = 2f(x,x)\delta(\omega)$ with $t = {t_var}$')
+plt.xlabel(r'$\omega$') 
+plt.ylabel(r'$\rho(\omega)$')
+plt.grid(True, alpha=0.3)
+plt.xlim(-0.5, 0.5)
+
+plt.tight_layout()
+
+# Save figure for t = 0.0
+filename_base = f"ldos_t_{t_var:.2f}".replace(".", "_")
+plt.savefig(os.path.join(figures_dir, filename_base + ".svg"), format="svg")
+plt.savefig(os.path.join(figures_dir, filename_base + ".jpg"), format="jpg", dpi=300)
+plt.show()
 
 for i, t_var in enumerate(t_values):
     # Constants c1 and c2 don't depend on t, so we use the already calculated ones
     # Only recalculate b(x) with new t
-    b_x_var = 16 * t_var**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
+    b_x_var = 4 * t_var**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
     
     print(f"\nt = {t_var}:")
     print(f"  a(x) = {a_x:.10f}")
     print(f"  b(x) = {b_x_var:.6f}")
     
     # Recalculate G(omega)
-    denominator_var = omega_complex**4 - b_x_var * omega_complex**2 + 0.5 * b_x_var**2
-    G_complex_var = (a_x * omega_complex**3) / denominator_var
+    denominator_var = omega_complex**2 - b_x_var 
+    G_complex_var = (a_x * omega_complex) / denominator_var
     result_var = -np.imag(G_complex_var) / np.pi
     
     # Create individual figure with correct figsize
-    plt.figure(figsize=(10, 8))  # Changed from (70, 8) which was clearly an error
+    plt.figure(figsize=(9, 7))
     plt.plot(omega_values, result_var, linewidth=1, color='red')
-    plt.title(rf"$\rho(\omega)$ with $t = {t_var}$")
-    plt.xlabel(r'$\omega$')
+    plt.title(rf'$\rho(x,\omega) = f(x,x)[\delta(\omega-b)+\delta(\omega+b)]$ with $t = {t_var}$')
+    plt.xlabel(r'$\omega$') 
     plt.ylabel(r'$\rho(\omega)$')
     plt.grid(True, alpha=0.3)
     
     # Set xlim according to t value
-    if t_var <= 0.05:  # First two plots (t=0.0 and t=0.05)
-        plt.xlim(-1.2, 1.2)
-    elif t_var <= 0.5:  # Intermediate plot (t=0.5)
-        plt.xlim(-3.2, 3.2)
-    else:  # Last plots (t=1.0 and t=2.0)
+    if t_var <= 0.05:  # First plot (t=0.05)
+        plt.xlim(-0.5, 0.5)
+    elif i == 1:  # Intermediate plot (t=2.0)
+        plt.xlim(-2, 2)
+    else:  # Last plot (t=5.0)
         plt.xlim(-n, n)
     
+    # Add text box with |b| value (increased fontsize for individual plots)
+    plt.text(0.98, 0.02, f'$|b| = {abs(np.sqrt(b_x_var)):.3f}$', transform=plt.gca().transAxes, 
+             bbox=dict(boxstyle='round', facecolor='white', alpha=0.8), fontsize=25,
+             horizontalalignment='right', verticalalignment='bottom')
+
     plt.tight_layout()
     
     # Save individual figure in both formats
     filename_base = f"ldos_t_{t_var:.2f}".replace(".", "_")
     plt.savefig(os.path.join(figures_dir, filename_base + ".svg"), format="svg")
     plt.savefig(os.path.join(figures_dir, filename_base + ".jpg"), format="jpg", dpi=300)
+    plt.show()
+
+# Reset font sizes to original values before GIF
+plt.rcParams.update({
+    'font.size': 18,
+    'axes.labelsize': 20,
+    'axes.titlesize': 22,
+    'xtick.labelsize': 18,
+    'ytick.labelsize': 18,
+    'legend.fontsize': 18,
+    'figure.titlesize': 20
+})
 
 # GIF configuration 
 t_min = 0.0
 t_max = 3.0
 
-t_segment1 = np.linspace(t_min, t_min + 0.15, 250, endpoint=False)
-t_segment2 = np.linspace(t_min + 0.2, t_max, 100, endpoint=True)
-t_values_anim = np.concatenate([t_segment1, t_segment2])
-
-# Configure smaller font sizes specifically for GIF to reduce memory usage
-plt.rcParams.update({
-    'text.usetex': True,
-    'text.latex.preamble': r'\usepackage{amsmath}',
-    'font.family': 'serif',
-    'font.serif': ['Computer Modern'],
-    'font.size': 12,
-    'axes.labelsize': 14,
-    'axes.titlesize': 16,
-    'xtick.labelsize': 12,
-    'ytick.labelsize': 12,
-    'legend.fontsize': 12,
-    'figure.titlesize': 18
-})
+t_values_anim = np.linspace(t_min, t_max, 100, endpoint=True)
 
 # Create the figure
 fig, ax = plt.subplots(figsize=(10, 6))
-plt.title(rf"Evolution of $\rho(\omega)$ with $t$ varying from ${t_min}$ to ${t_max}$")
+plt.title(r'$\rho(x,\omega) = f(x,x)[\delta(x-b)+\delta(x+b)]$ varying from $t=0$ to $t=3$')
 plt.xlabel(r'$\omega$')
 plt.ylabel(r'$\rho(\omega)$')
 plt.grid(True, alpha=0.3)
@@ -292,9 +346,9 @@ ax.set_xlim(np.min(omega_values), np.max(omega_values))
 y_max_global = 0
 y_min_global = 0
 for t_val in np.linspace(t_min, t_max, 20):  # Sample some t values
-    b_x_temp = 16 * t_val**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
-    denominator_temp = omega_complex**4 - b_x_temp * omega_complex**2 + 0.5 * b_x_temp**2
-    G_complex_temp = (a_x * omega_complex**3) / denominator_temp
+    b_x_temp = 4 * t_val**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
+    denominator_temp = omega_complex**2 - b_x_temp
+    G_complex_temp = (a_x * omega_complex) / denominator_temp
     result_temp = -np.imag(G_complex_temp) / np.pi
     y_max_global = max(y_max_global, np.max(result_temp))
     y_min_global = min(y_min_global, np.min(result_temp))
@@ -311,11 +365,11 @@ def init():
 # Animation function
 def animate(t_var):
   
-    b_x_var = 16 * t_var**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
+    b_x_var = 4 * t_var**2 * c1_squared * c2_squared * (abs(exp_term_d))**2 * (abs(exp_term_xi))**2
     
     # Calculate G(omega)
-    denominator_var = omega_complex**4 - b_x_var * omega_complex**2 + 0.5 * b_x_var**2
-    G_complex_var = (a_x * omega_complex**3) / denominator_var
+    denominator_var = omega_complex**2 - b_x_var 
+    G_complex_var = (a_x * omega_complex) / denominator_var
     result_var = -np.imag(G_complex_var) / np.pi
     
     # Update data
@@ -327,9 +381,21 @@ def animate(t_var):
     margin = 0.1 * (y_max_current - y_min_current) if y_max_current != y_min_current else 0.1
     ax.set_ylim(y_min_current - margin, y_max_current + margin)
     
-    # Update title
-    ax.set_title(rf"$\rho(\omega)$ with $t = {t_var:.2f}$")
+    # Update title with |b| value in text box
+    ax.clear()
+    ax.plot(omega_values, result_var, lw=1, color='red')
+    ax.set_title(rf'$\rho(x,\omega) = f(x,x)[\delta(\omega-b)+\delta(\omega+b)]$ with $t = {t_var:.2f}$')
+    ax.set_xlabel(r'$\omega$')
+    ax.set_ylabel(r'$\rho(\omega)$')
+    ax.grid(True, alpha=0.3)
+    ax.set_xlim(np.min(omega_values), np.max(omega_values))
+    ax.set_ylim(y_min_current - margin, y_max_current + margin)
     
+    # Add text box with |b| value
+    ax.text(0.98, 0.02, f'$|b| = {abs(np.sqrt(b_x_var)):.3f}$', transform=ax.transAxes, 
+            bbox=dict(boxstyle='round', facecolor='white', alpha=0.8), fontsize=6,
+            horizontalalignment='right', verticalalignment='bottom')
+
     return (line,)
 
 # Create the animation
@@ -337,7 +403,5 @@ anim = FuncAnimation(fig, animate, frames=t_values_anim,
                      init_func=init, blit=False, interval=100)
 
 # Save the GIF
-print("Saving GIFs with different frame rates")
-anim.save(os.path.join(figures_dir, 'ldos_evolution15.gif'), writer='pillow', fps=15, dpi=200)
-anim.save(os.path.join(figures_dir, 'ldos_evolution10.gif'), writer='pillow', fps=10, dpi=200)
-anim.save(os.path.join(figures_dir, 'ldos_evolution30.gif'), writer='pillow', fps=30, dpi=200)
+print("Generating GIF of LDOS evolution")
+anim.save(os.path.join(figures_dir, 'ldos_evolution.gif'), writer='pillow', fps=10, dpi=100)

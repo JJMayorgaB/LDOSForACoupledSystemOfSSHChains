@@ -160,7 +160,7 @@ result = -imaginary_part / np.pi
 # Visualization
 plt.figure(figsize=(8,6))
 
-plt.plot(omega_values, result, 'r-', linewidth=1)
+plt.plot(omega_values, result, 'magenta', linewidth=1)
 plt.xlabel(r'$\omega$')
 plt.ylabel(r'$\rho(\omega)$')
 plt.title(r'$\rho(x,\omega) = f(x,x)[\delta(\omega-b)+\delta(\omega+b)]$')
@@ -180,7 +180,6 @@ plt.text(0.98, 0.05, f'$|b| = {abs(b_x):.3f}$', transform=plt.gca().transAxes,
 plt.tight_layout()
 plt.savefig(os.path.join(figures_dir, "ldos_plot.svg"), format="svg")
 plt.savefig(os.path.join(figures_dir, "ldos_plot.jpg"), format="jpg", dpi=300)
-plt.show()
 
 # Auxiliary function to calculate normalized constants given parameters
 def calculate_normalized_constants(A_param, m1_param, m2_param, A_prime_param, m1_prime_param, m2_prime_param, x_eval_param):
@@ -256,7 +255,7 @@ result_var = -np.imag(G_complex_var) / np.pi
 
 # Create figure for t = 0.0
 plt.figure(figsize=(9, 7))
-plt.plot(omega_values, result_var, linewidth=1, color='red')
+plt.plot(omega_values, result_var, linewidth=1, color='magenta')
 plt.title(rf'$\rho(x,\omega) = 2f(x,x)\delta(\omega)$ with $t = {t_var}$')
 plt.xlabel(r'$\omega$') 
 plt.ylabel(r'$\rho(\omega)$')
@@ -269,7 +268,6 @@ plt.tight_layout()
 filename_base = f"ldos_t_{t_var:.2f}".replace(".", "_")
 plt.savefig(os.path.join(figures_dir, filename_base + ".svg"), format="svg")
 plt.savefig(os.path.join(figures_dir, filename_base + ".jpg"), format="jpg", dpi=300)
-plt.show()
 
 for i, t_var in enumerate(t_values):
     # Constants c1 and c2 don't depend on t, so we use the already calculated ones
@@ -287,7 +285,7 @@ for i, t_var in enumerate(t_values):
     
     # Create individual figure with correct figsize
     plt.figure(figsize=(9, 7))
-    plt.plot(omega_values, result_var, linewidth=1, color='red')
+    plt.plot(omega_values, result_var, linewidth=1, color='magenta')
     plt.title(rf'$\rho(x,\omega) = f(x,x)[\delta(\omega-b)+\delta(\omega+b)]$ with $t = {t_var}$')
     plt.xlabel(r'$\omega$') 
     plt.ylabel(r'$\rho(\omega)$')
@@ -312,7 +310,6 @@ for i, t_var in enumerate(t_values):
     filename_base = f"ldos_t_{t_var:.2f}".replace(".", "_")
     plt.savefig(os.path.join(figures_dir, filename_base + ".svg"), format="svg")
     plt.savefig(os.path.join(figures_dir, filename_base + ".jpg"), format="jpg", dpi=300)
-    plt.show()
 
 # Reset font sizes to original values before GIF
 plt.rcParams.update({
@@ -339,7 +336,7 @@ plt.ylabel(r'$\rho(\omega)$')
 plt.grid(True, alpha=0.3)
 
 # Initial line (empty)
-line, = ax.plot([], [], lw=1, color='red')
+line, = ax.plot([], [], lw=1, color='magenta')
 ax.set_xlim(np.min(omega_values), np.max(omega_values))
 
 # Calculate ylim dynamically by pre-calculating some values
@@ -383,7 +380,7 @@ def animate(t_var):
     
     # Update title with |b| value in text box
     ax.clear()
-    ax.plot(omega_values, result_var, lw=1, color='red')
+    ax.plot(omega_values, result_var, lw=1, color='magenta')
     ax.set_title(rf'$\rho(x,\omega) = f(x,x)[\delta(\omega-b)+\delta(\omega+b)]$ with $t = {t_var:.2f}$')
     ax.set_xlabel(r'$\omega$')
     ax.set_ylabel(r'$\rho(\omega)$')
